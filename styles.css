@@ -1,0 +1,152 @@
+@font-face {
+    font-family: 'Andada SC';
+    src: url("./resources/fonts/ANDADASC-REGULAR.OTF") format("woff2"), url("./resources/fonts/ANDADASC-BOLD.OTF") format("woff2"), url("./resources/fonts/ANDADASC-BOLDITALIC.OTF") format("woff2"), url("./resources/fonts/ANDADASC-ITALIC.OTF") format("woff2");
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    font-style: inherit;
+}
+
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./resources/images/site_tex_1.jpg");
+    background-size: 700px 700px;
+    color: antiquewhite;
+    overflow: scroll;
+    border: 2px solid rebeccapurple;
+    padding: 1px;
+}
+
+header {  
+    margin-top: 0%;
+    font-family: 'Andada SC', 'Times New Roman', Times, serif;
+    width: 100%  
+}
+
+#logo {
+    margin-top: 0px;
+    margin-left: 0.2%;
+    margin-right: 0.2%;
+    float: left;
+    width: 12em;
+    height: 12em;
+}
+
+
+
+h1 {
+    overflow-y: hidden;
+    margin-top: 0px;
+    color: ivory;
+    width: 1000px;
+    height: 100px;
+    font-size: 5em;
+    font-weight: 900;
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: midnightblue;       
+  }
+
+h2 {
+    margin-top: 0px;
+    color: steelblue;
+    width: 1000px;
+    height: 100px;
+    size: 36px;
+    font-weight: 600;
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: ivory;
+    text-align: center;
+}
+   
+p, li {
+    font-family: 'Junction', Arial, sans-serif;
+    font-size: 24px;
+  }
+
+footer {
+    font-family: 'Andada SC', 'Times New Roman', Times, serif;
+    background-color: steelblue;
+    width: 100%;
+}
+
+.coverimg {
+    margin-top: 0px;
+    margin-left: 0.2%;
+    margin-right: 0.2%;
+    float: left;
+    width: 8em;
+    height: 11em;
+}
+
+.footlink {
+    font-family: 'Andada SC', 'Times New Roman', Times, serif;
+    margin-left: 1%;
+    margin-right: 1%;
+    color: paleturquoise;
+    font-size: 24px;
+}
+
+.footlink:hover {
+    cursor: pointer;
+    color: ivory;
+}
+
+.hero-image {
+    margin-top: 0%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./resources/images/wolf_banner_3.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 20%;
+    background-position-x: 50%;
+    position: relative;
+}
+
+.hero-text {
+    vertical-align: middle;
+    margin-top: 0%;
+}
+
+.topbar{
+    border: 0px yellowgreen solid;
+    border-radius: 6px;
+    background-color: steelblue;
+    color: paleturquoise;
+    font-family: 'Junction', Arial, sans-serif;
+    font-weight: 600;
+    width: 24.8%;
+    height: 40px;
+    margin-left: 0.1%;
+    margin-right: 0.1%;
+    font-size: 30px;
+}
+
+.topbar:hover {
+    cursor: pointer;
+    color: ivory;
+}
+
+.dmguildlink{
+    background-color: midnightblue;
+    color: midnightblue;
+}
+
+button:hover {
+    cursor: pointer;
+    color: ivory;
+    lighting-color: ivory;
+}
+     
+a {
+    text-decoration: none;
+    color: steelblue;
+  }
+
+a:hover {
+    cursor: pointer;
+    color: ivory;
+}
