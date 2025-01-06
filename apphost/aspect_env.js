@@ -364,17 +364,17 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /************************************************************
- * 7) AI Prompt + API Call
+ * 7) AI Prompt + API Call - changed it up
  ************************************************************/
 function buildAIPrompt(randomResults) {
     return `
 You are a creative storytelling AI.
-Please craft a short narrative scene for Dungeons & Dragons using the following random table results:
+Please craft a short narrative medieval horror fantasy scene, describing the environment to single actor using the following random table results:
 
 ${randomResults}
 
 In your story, tie together the setting details in a cohesive, atmospheric way.
-Use a friendly, descriptive tone, and aim for around 2-3 concise paragraphs.
+Use a dark, ominous tone, and aim for around 2-3 concise paragraphs.
 `;
 }
 
