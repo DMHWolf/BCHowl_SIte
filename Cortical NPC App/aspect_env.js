@@ -320,7 +320,7 @@ function generateSurroundings() {
     }
 
     const combinedResults = results.join("\n");
-    fetch('http://209.38.30.175:3000/api/generate', {
+    fetch('https://www.bchowl.com/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ randomResults: combinedResults })
@@ -346,6 +346,7 @@ function generateSurroundings() {
                 aiContainer.textContent = 'Error connecting to the server. Please try again later.';
             }
         });
+
 }
 
 /************************************************************
