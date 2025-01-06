@@ -289,7 +289,7 @@ function generateSphereOfAwareness() {
 function generateSurroundings() {
     let results = [];
 
-    // Get references to checkboxes
+    // Collect results from all checked boxes
     const weatherCbx = document.getElementById("weather");
     const temperatureCbx = document.getElementById("temperature");
     const outdoorSoundCbx = document.getElementById("outdoorSound");
@@ -301,56 +301,51 @@ function generateSurroundings() {
     const outdoorAspCbx = document.getElementById("outdoorAspect");
     const sphereAwarenessCbx = document.getElementById("sphereAwareness");
 
-    // Collect results from all checked boxes
-    if (weatherCbx && weatherCbx.checked) {
-        results.push(generateWeather());
-    }
-    if (temperatureCbx && temperatureCbx.checked) {
-        results.push(generateTemperature());
-    }
-    if (outdoorSoundCbx && outdoorSoundCbx.checked) {
-        results.push(generateOutdoorSound());
-    }
-    if (indoorSoundCbx && indoorSoundCbx.checked) {
-        results.push(generateIndoorSound());
-    }
-    if (lightingCbx && lightingCbx.checked) {
-        results.push(generateLighting());
-    }
-    if (verticalityCbx && verticalityCbx.checked) {
-        results.push(generateVerticality());
-    }
-    if (purposeCbx && purposeCbx.checked) {
-        results.push(generateStructurePurpose(true));
-    }
-    if (indoorAspCbx && indoorAspCbx.checked) {
-        results.push(generateSignificantAspectIndoor());
-    }
-    if (outdoorAspCbx && outdoorAspCbx.checked) {
-        results.push(generateSignificantAspectOutdoor());
-    }
-    if (sphereAwarenessCbx && sphereAwarenessCbx.checked) {
-        results.push(generateSphereOfAwareness());
-    }
+    if (weatherCbx && weatherCbx.checked) results.push(generateWeather());
+    if (temperatureCbx && temperatureCbx.checked) results.push(generateTemperature());
+    if (outdoorSoundCbx && outdoorSoundCbx.checked) results.push(generateOutdoorSound());
+    if (indoorSoundCbx && indoorSoundCbx.checked) results.push(generateIndoorSound());
+    if (lightingCbx && lightingCbx.checked) results.push(generateLighting());
+    if (verticalityCbx && verticalityCbx.checked) results.push(generateVerticality());
+    if (purposeCbx && purposeCbx.checked) results.push(generateStructurePurpose(true));
+    if (indoorAspCbx && indoorAspCbx.checked) results.push(generateSignificantAspectIndoor());
+    if (outdoorAspCbx && outdoorAspCbx.checked) results.push(generateSignificantAspectOutdoor());
+    if (sphereAwarenessCbx && sphereAwarenessCbx.checked) results.push(generateSphereOfAwareness());
 
-    // Show them in the results container
     const resultsContainer = document.getElementById("resultsContainer");
-    if (!resultsContainer) {
-        console.warn("No element with ID 'resultsContainer' found.");
-        return;
+    if (resultsContainer) {
+        resultsContainer.innerHTML = results.length
+            ? results.map(r => `<p>${r}</p>`).join("")
+            : "No tables selected.";
     }
 
-    if (results.length === 0) {
-        resultsContainer.textContent = "No tables selected.";
-        return;
-    } else {
-        // Display each result
-        resultsContainer.innerHTML = results.map(r => `<p>${r}</p>`).join("");
-    }
-
-    // Create a multiline string for AI (optional)
     const combinedResults = results.join("\n");
-    generateAIDescription(combinedResults);
+    fetch('http://209.38.30.175:3000/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ randomResults: combinedResults })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const aiContainer = document.getElementById('aiDescription');
+            if (aiContainer) {
+                aiContainer.textContent = data.aiText || 'No AI response received.';
+            } else {
+                console.warn('AI description container not found.');
+            }
+        })
+        .catch(err => {
+            console.error('Error connecting to the server:', err);
+            const aiContainer = document.getElementById('aiDescription');
+            if (aiContainer) {
+                aiContainer.textContent = 'Error connecting to the server. Please try again later.';
+            }
+        });
 }
 
 /************************************************************
@@ -363,67 +358,3 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-/************************************************************
- * 7) AI Prompt + API Call
- ************************************************************/
-function buildAIPrompt(randomResults) {
-    return `
-You are a creative storytelling AI.
-Please craft a short narrative scene for Dungeons & Dragons using the following random table results:
-
-${randomResults}
-
-In your story, tie together the setting details in a cohesive, atmospheric way.
-Use a friendly, descriptive tone, and aim for around 2-3 concise paragraphs.
-`;
-}
-
-async function generateAIDescription(randomResults) {
-    // If you do NOT have a server endpoint, and you want to do it client-side 
-    // (NOT recommended, as it exposes your API key), you must hard-code or get it 
-    // from a config. Doing "require('fs')" won't work in the browser.
-
-    // For demonstration, let's assume you have a variable MY_OPENAI_KEY 
-    // or you fetch it from a secure endpoint:
-    const MY_OPENAI_KEY = "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"; // not recommended client-side
-
-    const prompt = buildAIPrompt(randomResults);
-
-    try {
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${MY_OPENAI_KEY}`
-            },
-            body: JSON.stringify({
-                model: "gpt-4o-mini",
-                messages: [
-                    // Option A: Put your entire 'prompt' as the user content:
-                    {
-                        role: "user",
-                        content: prompt
-                    }
-                ],
-                max_tokens: 200,
-                temperature: 0.7
-            })
-        });
-
-        const data = await response.json();
-        const aiText = data?.choices?.[0]?.message?.content?.trim() || "No AI response";
-
-        const aiContainer = document.getElementById("aiDescription");
-        if (aiContainer) {
-            aiContainer.textContent = aiText;
-        } else {
-            console.log("AI Description:", aiText);
-        }
-    } catch (err) {
-        console.error("Error calling AI:", err);
-        const aiContainer = document.getElementById("aiDescription");
-        if (aiContainer) {
-            aiContainer.textContent = "Error calling AI. Check console.";
-        }
-    }
-}
