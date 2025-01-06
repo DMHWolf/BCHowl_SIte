@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Random Surroundings Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Random Surroundings Generator</h1>
+  </header>
+  
+  <main>
+    <!-- Controls / Options -->
+    <section class="controls">
+      <!-- Example: Choose to roll from these categories -->
+      <div class="option-group">
+        <h2>Choose Tables to Roll</h2>
+        
+        <label>
+          <input type="checkbox" id="weather" checked />
+          Weather & Wind Intensity (1.1)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="temperature" checked />
+          Temperature (1.2)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="outdoorSound" />
+          Outdoor Sound (1.3)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="indoorSound" />
+          Indoor Sound (1.4)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="lighting" />
+          Lighting (1.5)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="verticality" />
+          Verticality of Form/Structure (1.6)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="structurePurpose" />
+          Purpose of a Structure (1.7)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="indoorAspect" />
+          Significant Aspect (Indoor) (1.8)
+        </label>
+        
+        <label>
+          <input type="checkbox" id="outdoorAspect" />
+          Significant Aspect (Outdoor) (1.9)
+        </label>
+
+        <!-- NEW checkbox for Sphere of Awareness -->
+        <label>
+          <input type="checkbox" id="sphereAwareness" />
+          Sphere of Awareness (translation)
+        </label>
+      </div>
+      
+      <!-- Button to trigger generation -->
+      <button id="generateBtn">Generate Surroundings</button>
+    </section>
+    
+    <!-- Results -->
+    <section class="results" id="resultsSection">
+      <h2>Results</h2>
+      <div id="resultsContainer"></div>
+    </section>
+  </main>
+  
+  <footer>
+    <p>Random Surroundings Generator using Cortical NPC tables</p>
+  </footer>
+  
+    <section class="results" id="resultsSection">
+  <h2>Results</h2>
+  <div id="resultsContainer"></div>
+</section>
+
+<!-- AI-generated story (optional) -->
+<section class="results" id="aiStorySection">
+  <h2>AI-Generated Story</h2>
+  <div id="aiDescription"> <!-- We'll put the AI text here --></div>
+</section>
+
+  <!-- Link to JavaScript -->
+  <script src="aspect_env.js"></script>
+</body>
+</html>
