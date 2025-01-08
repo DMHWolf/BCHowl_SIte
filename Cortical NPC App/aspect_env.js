@@ -320,7 +320,7 @@ function generateSurroundings() {
     }
 
     const combinedResults = results.join("\n");
-    fetch('https://www.bchowl.com/api/generate', {
+    fetch('https://www.bchowl.com/Cortical%20NPC%20App/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ randomResults: combinedResults })
